@@ -7,5 +7,6 @@ export const FIREBASE_ERRORS: { [key: string]: string } = {
   'auth/email-already-in-use': 'Este correo electrónico ya está registrado.',
   'auth/invalid-credential':
     'No se encontró un usuario con estas credenciales. Por favor, regístrese.',
+  'auth/admin-restricted-operation': 'Por favor, complete el formulario.',
   // Agrega aquí más errores que necesites
 };

@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LoginService } from '../../servicios/login.service';
 import { error } from 'console';
 import express from 'express';
+import { FIREBASE_ERRORS } from '../../helper/firebase-errors';
 
 @Component({
   selector: 'app-registro',
@@ -35,7 +36,10 @@ export class RegistroComponent implements OnInit {
         this.router.navigate(['/']);
       })
       .catch((error) => {
-        this.toastr.error(error);
+        const errorMessage =
+          FIREBASE_ERRORS[error.code] ||
+          'Ocurrió un error inesperado. Intenta de nuevo.';
+        this.toastr.error(errorMessage, 'Error');
       });
   }
 }
