@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../servicios/login.service';
 import { ToastrService } from 'ngx-toastr';
+import { FIREBASE_ERRORS } from '../../helper/firebase-errors';
 
 @Component({
   selector: 'app-login',
@@ -32,12 +33,14 @@ export class LoginComponent implements OnInit {
     this.loginService
       .login(this.email, this.password)
       .then((res) => {
-        console.log(res);
         this.router.navigate(['/']);
       })
       .catch((error) => {
-        console.log('desde error');
-        this.toastr.error(error.message, 'Error');
+        const errorMessage =
+          FIREBASE_ERRORS[error.code] ||
+          'Ocurrió un error inesperado. Intenta de nuevo.';
+        this.toastr.error(errorMessage, 'Error');
+        /* this.toastr.error(error, 'Error'); */
       });
   }
 
